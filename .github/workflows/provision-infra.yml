@@ -10,15 +10,18 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        
       - name: Log in to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - name: Deploy Infrastructure
         run: |
           az deployment group create \
             --resource-group WatchTowerRG \
             --template-file infrastructure/main.bicep
+          
       - name: Build and Publish Project
         run: |
           echo "Building and publishing the project..."
@@ -26,6 +29,7 @@ jobs:
           echo "Build and publish completed."
           echo "Contents of ./src/publish:"
           ls -R ./src/publish
+          
       - name: Validate Publish Directory
         run: |
           echo "Validating that the publish directory exists..."
@@ -34,8 +38,10 @@ jobs:
             exit 1
           fi
           echo "Validation passed. Publish directory exists."
+          
       - name: Set Directory Permissions
         run: chmod -R 755 ./src/publish
+        
       - name: Zip Published Files
         run: |
           echo "Zipping published files..."
@@ -43,6 +49,7 @@ jobs:
           zip -r ../app.zip .
           echo "Contents of ./src:"
           ls ../
+          
       - name: Validate ZIP File
         run: |
           echo "Checking if app.zip exists..."
@@ -50,14 +57,16 @@ jobs:
             echo "Error: app.zip not found!"
             exit 1
           fi
+          
       - name: Deploy Application Code to Web App (Central India)
         uses: azure/cli@v2
         with:
           inlineScript: |
-            echo "Current Directory: $(pwd)"
-            echo "Deploying from path: $(pwd)/src/app.zip"
+            SRC_ABSOLUTE_PATH=$(pwd)/src/app.zip
+            echo "Resolved Absolute Path: $SRC_ABSOLUTE_PATH"
+            echo "Deploying from path: $SRC_ABSOLUTE_PATH"
             echo "Deploying to Web App (Central India): $WEBAPP_CI"
             az webapp deploy --name WatchTower-CI-WebApp01 \
               --resource-group WatchTowerRG \
-              --src-path /home/runner/work/Watchtower/Watchtower/src/app.zip \
+              --src-path $SRC_ABSOLUTE_PATH \
               --type zip
