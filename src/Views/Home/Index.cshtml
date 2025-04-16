@@ -1,8 +1,35 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Watchtower</h1>
+    <p class="lead">Your one-stop shop for quality products and seamless shopping experience.</p>
+    <hr class="my-4">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Explore Our Products</h3>
+            <p>Discover a wide range of quality products from top categories. Find what you need with ease!</p>
+            <a href="/Products" class="btn btn-primary">View Products</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Fast and Reliable</h3>
+            <p>Enjoy seamless shopping with fast delivery and a reliable user experience tailored for you.</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Your Cart</h3>
+            <p>Easily manage your selections with an intuitive cart feature. Checkout with confidence!</p>
+            <a href="/Cart" class="btn btn-secondary">Go to Cart</a>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="text-center">
+        <h4>Get Started Today!</h4>
+        <p>Sign up or log in now to experience shopping like never before.</p>
+        <a href="/Login" class="btn btn-success">Login</a>
+        <a href="/Register" class="btn btn-warning">Register</a>
+    </div>
 </div>
