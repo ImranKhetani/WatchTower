@@ -24,6 +24,18 @@ jobs:
           echo "Building and publishing the project..."
           dotnet publish ./src/Watchtower.csproj -c Release -o ./src/publish
           echo "Build and publish completed."
+          echo "Contents of ./src/publish:"
+          ls -R ./src/publish
+      - name: Validate Publish Directory
+        run: |
+          echo "Validating that the publish directory exists..."
+          if [ ! -d ./src/publish ]; then
+            echo "Error: Publish directory does not exist."
+            exit 1
+          fi
+          echo "Validation passed. Publish directory exists."
+      - name: Set Directory Permissions
+        run: chmod -R 755 ./src/publish
       - name: Zip Published Files
         run: |
           echo "Zipping published files..."
@@ -33,6 +45,9 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
+            echo "Current Directory: $(pwd)"
+            echo "Deploying from path: $(pwd)/src/app.zip"
+            echo "Deploying to Web App (Central India): $WEBAPP_CI"
             az webapp deploy --name WatchTower-CI-WebApp01 \
               --resource-group WatchTowerRG \
               --src-path /home/runner/work/Watchtower/Watchtower/src/app.zip \
