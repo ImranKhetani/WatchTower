@@ -1,9 +1,9 @@
 // Parameters
-param location string = 'East US'
-param appServicePlanName string = 'myAppServicePlan'
-param webAppName string = 'myWebApp'
-param prometheusAppName string = 'prometheusApp'
-param grafanaAppName string = 'grafanaApp'
+param location string = 'Central India'
+param appServicePlanName string = 'WatchTower-CI-ASP01'
+param webAppName string = 'WatchTower-CI-WebApp01'
+param prometheusAppName string = 'WatchTower-CI-prometheusApp01'
+param grafanaAppName string = 'WatchTower-CI-grafanaApp01'
 
 // App Service Plan (Free Tier)
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {

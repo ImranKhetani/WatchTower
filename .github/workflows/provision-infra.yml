@@ -17,9 +17,8 @@ jobs:
       - name: Deploy Infrastructure
         run: |
           az deployment group create \
-            --resource-group <your-resource-group> \
-            --template-file infrastructure/main.bicep \
-            --parameters infrastructure/parameters.json
+            --resource-group WatchTowerRG \
+            --template-file infrastructure/main.bicep
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
