@@ -19,25 +19,21 @@ jobs:
           az deployment group create \
             --resource-group WatchTowerRG \
             --template-file infrastructure/main.bicep
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
+      - name: Build and Publish Project
+        run: |
+          echo "Building and publishing the project..."
+          dotnet publish ./src/Watchtower.csproj -c Release -o ./src/publish
+          echo "Build and publish completed."
+      - name: Zip Published Files
+        run: |
+          echo "Zipping published files..."
+          cd ./src/publish
+          zip -r ../app.zip .
+      - name: Deploy Application Code to Web App (Central India)
+        uses: azure/cli@v2
         with:
-          dotnet-version: 8.0.x
-      - name: Restore Dependencies
-        working-directory: src
-        run: dotnet restore
-      - name: Build Application
-        working-directory: src
-        run: dotnet build --configuration Release --no-restore
-      - name: Publish Application
-        working-directory: src
-        run: dotnet publish --configuration Release --output ./publish
-      - name: Run Database Update
-        working-directory: src
-        run: dotnet ef database update --no-build
-      - name: Deploy Application
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: WatchTower-CI-WebApp01
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: src/publish
+          inlineScript: |
+            az webapp deploy --name WatchTower-CI-WebApp01 \
+              --resource-group WatchTowerRG \
+              --src-path /home/runner/work/Watchtower/Watchtower/src/app.zip \
+              --type zip
