@@ -41,6 +41,15 @@ jobs:
           echo "Zipping published files..."
           cd ./src/publish
           zip -r ../app.zip .
+          echo "Contents of ./src:"
+          ls ../
+      - name: Validate ZIP File
+        run: |
+          echo "Checking if app.zip exists..."
+          if [ ! -f ./src/app.zip ]; then
+            echo "Error: app.zip not found!"
+            exit 1
+          fi
       - name: Deploy Application Code to Web App (Central India)
         uses: azure/cli@v2
         with:
