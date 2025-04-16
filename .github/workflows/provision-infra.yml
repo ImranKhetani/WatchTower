@@ -14,7 +14,7 @@ jobs:
       - name: Install .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x  # Ensure the correct .NET version matches your project configuration
+          dotnet-version: 8.0.x  # Ensure it matches your project version
 
       - name: Verify .NET Installation
         run: |
@@ -23,23 +23,24 @@ jobs:
           dotnet --list-sdks
           dotnet --list-runtimes
         
+      - name: Prepare Environment for Global Tools
+        run: |
+          echo "Setting up environment for global tools..."
+          export PATH="$HOME/.dotnet/tools:$PATH"
+          echo "Updated PATH: $PATH"
+        env:
+          DOTNET_ROOT: /usr/share/dotnet
+          PATH: $HOME/.dotnet/tools:$PATH
+
       - name: Install dotnet EF Tool
         run: |
           echo "Installing dotnet EF tool..."
           dotnet tool install --global dotnet-ef
-          export PATH="$PATH:$HOME/.dotnet/tools"
-          echo "Updated PATH: $PATH"
-          dotnet ef --version
-        env:
-          DOTNET_ROOT: /usr/share/dotnet
-          PATH: $PATH:$HOME/.dotnet/tools
-          
-      - name: Verify dotnet EF Tool Installation
-        run: |
-          echo "Verifying dotnet EF installation..."
+          echo "Checking installed tools directory..."
           ls $HOME/.dotnet/tools
+          echo "Verifying dotnet EF tool..."
           dotnet ef --version
-          
+        
       - name: Apply Database Migrations
         working-directory: src
         run: |
