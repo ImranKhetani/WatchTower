@@ -27,18 +27,25 @@ jobs:
         run: |
           echo "Installing dotnet EF tool..."
           dotnet tool install --global dotnet-ef
-          export PATH="$PATH:/home/runner/.dotnet/tools"
-          echo "PATH updated for dotnet tools: $PATH"
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          echo "Updated PATH: $PATH"
+          dotnet ef --version
         env:
           DOTNET_ROOT: /usr/share/dotnet
-          PATH: $PATH:/home/runner/.dotnet/tools
+          PATH: $PATH:$HOME/.dotnet/tools
+          
+      - name: Verify dotnet EF Tool Installation
+        run: |
+          echo "Verifying dotnet EF installation..."
+          ls $HOME/.dotnet/tools
+          dotnet ef --version
           
       - name: Apply Database Migrations
         working-directory: src
         run: |
           echo "Applying database migrations..."
           dotnet ef database update --no-build
-          
+        
       - name: Log in to Azure
         uses: azure/login@v1
         with:
