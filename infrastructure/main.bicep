@@ -20,15 +20,17 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: webAppName
   location: location
-  serverFarmId: appServicePlan.id
-  siteConfig: {
-    linuxFxVersion: 'DOTNET|8.0' // Hosting .NET 8 app
-    appSettings: [
-      {
-        name: 'WEBSITE_RUN_FROM_PACKAGE'
-        value: '1'
-      }
-    ]
+  properties: {
+    serverFarmId: appServicePlan.id
+    siteConfig: {
+      linuxFxVersion: 'DOTNET|8.0' // Hosting .NET 8 app
+      appSettings: [
+        {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '1'
+        }
+      ]
+    }
   }
 }
 
@@ -36,19 +38,21 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 resource prometheusApp 'Microsoft.Web/sites@2022-03-01' = {
   name: prometheusAppName
   location: location
-  serverFarmId: appServicePlan.id
-  siteConfig: {
-    linuxFxVersion: 'DOCKER|prom/prometheus:latest' // Prometheus Docker image
-    appSettings: [
-      {
-        name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
-        value: 'false'
-      }
-      {
-        name: 'DOCKER_CUSTOM_IMAGE_NAME'
-        value: 'prom/prometheus:latest'
-      }
-    ]
+  properties: {
+    serverFarmId: appServicePlan.id
+    siteConfig: {
+      linuxFxVersion: 'DOCKER|prom/prometheus:latest' // Prometheus Docker image
+      appSettings: [
+        {
+          name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
+          value: 'false'
+        }
+        {
+          name: 'DOCKER_CUSTOM_IMAGE_NAME'
+          value: 'prom/prometheus:latest'
+        }
+      ]
+    }
   }
 }
 
@@ -56,18 +60,20 @@ resource prometheusApp 'Microsoft.Web/sites@2022-03-01' = {
 resource grafanaApp 'Microsoft.Web/sites@2022-03-01' = {
   name: grafanaAppName
   location: location
-  serverFarmId: appServicePlan.id
-  siteConfig: {
-    linuxFxVersion: 'DOCKER|grafana/grafana:latest' // Grafana Docker image
-    appSettings: [
-      {
-        name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
-        value: 'false'
-      }
-      {
-        name: 'DOCKER_CUSTOM_IMAGE_NAME'
-        value: 'grafana/grafana:latest'
-      }
-    ]
+  properties: {
+    serverFarmId: appServicePlan.id
+    siteConfig: {
+      linuxFxVersion: 'DOCKER|grafana/grafana:latest' // Grafana Docker image
+      appSettings: [
+        {
+          name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
+          value: 'false'
+        }
+        {
+          name: 'DOCKER_CUSTOM_IMAGE_NAME'
+          value: 'grafana/grafana:latest'
+        }
+      ]
+    }
   }
 }
