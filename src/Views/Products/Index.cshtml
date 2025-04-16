@@ -1,0 +1,17 @@
+@model List<Watchtower.Models.Product>
+
+<h2 class="text-center">Available Products</h2>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="@product.ImageUrl" alt="@product.Name" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">Price: $@product.Price</p>
+                    <a href="/Cart/AddToCart?productId=@product.Id" class="btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    }
