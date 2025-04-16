@@ -30,6 +30,12 @@ jobs:
           echo "Contents of ./src/publish:"
           ls -R ./src/publish
           
+      - name: Install dotnet EF Tool
+        run: dotnet tool install --global dotnet-ef
+        env:
+          DOTNET_ROOT: /usr/share/dotnet
+          PATH: $PATH:/usr/share/dotnet/tools
+          
       - name: Apply Database Migrations
         working-directory: src
         run: dotnet ef database update --no-build
