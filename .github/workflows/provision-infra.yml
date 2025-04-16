@@ -30,15 +30,10 @@ jobs:
           echo "Contents of ./src/publish:"
           ls -R ./src/publish
           
-      - name: Validate Publish Directory
-        run: |
-          echo "Validating that the publish directory exists..."
-          if [ ! -d ./src/publish ]; then
-            echo "Error: Publish directory does not exist."
-            exit 1
-          fi
-          echo "Validation passed. Publish directory exists."
-          
+      - name: Apply Database Migrations
+        working-directory: src
+        run: dotnet ef database update --no-build
+        
       - name: Set Directory Permissions
         run: chmod -R 755 ./src/publish
         
@@ -50,22 +45,12 @@ jobs:
           echo "Contents of ./src:"
           ls ../
           
-      - name: Validate ZIP File
-        run: |
-          echo "Checking if app.zip exists..."
-          if [ ! -f ./src/app.zip ]; then
-            echo "Error: app.zip not found!"
-            exit 1
-          fi
-          
-      - name: Deploy Application Code to Web App (Central India)
+      - name: Deploy Application Code to Web App
         uses: azure/cli@v2
         with:
           inlineScript: |
             SRC_ABSOLUTE_PATH=$(pwd)/src/app.zip
             echo "Resolved Absolute Path: $SRC_ABSOLUTE_PATH"
-            echo "Deploying from path: $SRC_ABSOLUTE_PATH"
-            echo "Deploying to Web App (Central India): $WEBAPP_CI"
             az webapp deploy --name WatchTower-CI-WebApp01 \
               --resource-group WatchTowerRG \
               --src-path $SRC_ABSOLUTE_PATH \
