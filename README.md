@@ -10,28 +10,6 @@
 - **Real-Time Monitoring**: Prometheus and Grafana for system metrics visualization and anomaly detection.
 - **Cloud Deployment**: Hosted on Azure App Services using the Free Tier.
 
-## Folder Structure
-
-WATCHTOWER/
-├── src/                          # Application codebase
-│   ├── Controllers/              # API controllers
-│   ├── Data/                     # Database context and setup
-│   ├── Migrations/               # EF Core migrations
-│   ├── Models/                   # Domain models
-│   ├── Views/                    # Razor views
-│   ├── wwwroot/                  # Static files
-│   ├── Program.cs                # App entry point
-│   ├── Watchtower.csproj         # Project file
-│   ├── appsettings.json          # App settings
-├── infrastructure/               # Infrastructure as Code (IaC)
-│   ├── main.bicep                # Bicep file for Azure deployment
-│   ├── parameters.json           # Parameter values for Bicep
-├── .github/                      # CI/CD workflows
-│   └── workflows/
-│       └── provision-infra.yml   # GitHub Actions workflow
-├── README.md                     # Project documentation
-
-
 ## Prerequisites
 
 1. **.NET Core SDK**: Install the latest .NET 8 SDK.
