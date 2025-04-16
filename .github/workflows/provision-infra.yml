@@ -32,6 +32,9 @@ jobs:
       - name: Publish Application
         working-directory: src
         run: dotnet publish --configuration Release --output ./publish
+      - name: Run Database Update
+        working-directory: src
+        run: dotnet ef database update --no-build
       - name: Deploy Application
         uses: azure/webapps-deploy@v2
         with:

@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ikhetani\\Downloads\\Watchtower\\Watchtower.csproj": {}
+    "/home/hotmail/Watchtower/src/Watchtower.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ikhetani\\Downloads\\Watchtower\\Watchtower.csproj": {
+    "/home/hotmail/Watchtower/src/Watchtower.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ikhetani\\Downloads\\Watchtower\\Watchtower.csproj",
+        "projectUniqueName": "/home/hotmail/Watchtower/src/Watchtower.csproj",
         "projectName": "Watchtower",
-        "projectPath": "C:\\Users\\ikhetani\\Downloads\\Watchtower\\Watchtower.csproj",
-        "packagesPath": "C:\\Users\\ikhetani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ikhetani\\Downloads\\Watchtower\\obj\\",
+        "projectPath": "/home/hotmail/Watchtower/src/Watchtower.csproj",
+        "packagesPath": "/home/hotmail/.nuget/packages/",
+        "outputPath": "/home/hotmail/Watchtower/src/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ikhetani\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/hotmail/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.intra.vision-box.com/api/v2": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -86,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
